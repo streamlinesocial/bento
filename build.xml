@@ -6,11 +6,11 @@
         depends="prepare,create-vbox,validate-vbox,export-vbox,rename-vbox"/>
 
     <target name="clean" description="Cleanup build artifacts">
-        <delete dir="${basedir}/centos-6.3.box"/>
+        <delete dir="${basedir}/strsocial-centos-6.3-i386.box"/>
         <exec executable="vagrant" failonerror="false">
             <arg value="box" />
             <arg value="remove" />
-            <arg value="'centos-6.3'" />
+            <arg value="'centos-6.3-i386'" />
         </exec>
     </target>
 
@@ -28,7 +28,7 @@
             <arg value="vagrant" />
             <arg value="basebox" />
             <arg value="build" />
-            <arg value="centos-6.3" />
+            <arg value="centos-6.3-i386" />
             <arg value="--force" />
             <arg value="--auto" />
             <arg value="--nogui" />
@@ -42,7 +42,7 @@
             <arg value="vagrant" />
             <arg value="basebox" />
             <arg value="validate" />
-            <arg value="centos-6.3" />
+            <arg value="centos-6.3-i386" />
         </exec>
     </target>
 
@@ -52,20 +52,12 @@
             <arg value="vagrant" />
             <arg value="basebox" />
             <arg value="export" />
-            <arg value="centos-6.3" />
+            <arg value="centos-6.3-i386" />
         </exec>
     </target>
 
     <target name="rename-vbox" description="Rename the vbox file to the final name">
-        <move file="centos-6.3.box" tofile="strsocial-centos-6.3-x86_64.box"/>
+        <move file="centos-6.3-i386.box" tofile="strsocial-centos-6.3-i386.box"/>
     </target>
 
-    <!--<target name="import-vbox" description="Import the veewee box into vagrant">-->
-    <!--    <exec executable="vagrant" failonerror="true">-->
-    <!--        <arg value="box" />-->
-    <!--        <arg value="add" />-->
-    <!--        <arg value="'strsocial-centos-6.3'" />-->
-    <!--        <arg value="'strsocial-centos-6.3'" />-->
-    <!--    </exec>-->
-    <!--</target>-->
 </project>
