@@ -57,7 +57,7 @@
     </target>
 
     <target name="rename-vbox" description="Rename the vbox file to the final name">
-        <move file="centos-6.3.box" tofile="strsocial-centos-6.3.box"/>
+        <move file="centos-6.3.box" tofile="strsocial-centos-6.3-x86_64.box"/>
     </target>
 
     <!--<target name="import-vbox" description="Import the veewee box into vagrant">-->
