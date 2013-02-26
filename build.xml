@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="PHP Base" default="build">
+<project name="Vagrant CentOS 6.3 64bit Box" default="build">
 
     <target name="build"
         depends="prepare,create-vbox,validate-vbox,export-vbox,rename-vbox"/>
