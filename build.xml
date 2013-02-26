@@ -7,7 +7,7 @@
 
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/strsocial-centos-6.3-x86_64.box"/>
-        <exec executable="vagrant" failonerror="false">
+        <exec executable="vagrant" failonerror="false" failifexecutionfails="false">
             <arg value="box" />
             <arg value="remove" />
             <arg value="'centos-6.3'" />
