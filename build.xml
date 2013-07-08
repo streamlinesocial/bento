@@ -11,6 +11,7 @@
             <arg value="box" />
             <arg value="remove" />
             <arg value="'centos-6.3-i386'" />
+            <arg value="virtualbox" />
         </exec>
     </target>
 
