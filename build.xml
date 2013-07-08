@@ -20,7 +20,8 @@
         <exec executable="bundle" failonerror="true">
             <arg value="install" />
             <arg value="--binstubs" />
-            <arg value="--path='./.gems'" />
+            <arg value="--path" />
+            <arg path="gems" />
         </exec>
     </target>
 
