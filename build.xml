@@ -10,7 +10,7 @@
         <exec executable="vagrant" failonerror="false">
             <arg value="box" />
             <arg value="remove" />
-            <arg value="'centos-6.3-i386'" />
+            <arg value="centos-6.3-i386" />
             <arg value="virtualbox" />
         </exec>
     </target>
