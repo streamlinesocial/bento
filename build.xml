@@ -19,6 +19,7 @@
         <exec executable="bundle" failonerror="true">
             <arg value="install" />
             <arg value="--binstubs" />
+            <arg value="--path='./.gems'" />
         </exec>
     </target>
 
