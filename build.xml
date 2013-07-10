@@ -22,7 +22,7 @@
         depends="prepare,create-vbox,validate-vbox,export-vbox,rename-vbox"/>
 
     <target name="clean" description="Cleanup build artifacts">
-        <delete dir="${basedir}/build" />
+        <delete file="${basedir}/build/${box.name}.box" />
         <exec executable="vagrant" failonerror="false">
             <arg value="box" />
             <arg value="remove" />
