@@ -4,6 +4,11 @@
 
     <property file="${basedir}/build.properties"/>
 
+    <target name="test-props">
+        <echo message="${basedir}/build/${box.definition}" />
+        <echo message="${basedir}/build/${box.name}" />
+    </target>
+
     <target name="build"
         depends="prepare,create-vbox,validate-vbox,export-vbox,rename-vbox"/>
 
@@ -30,8 +35,8 @@
     <target name="create-vbox" description="Build the veewee box">
         <exec executable="bundle" failonerror="true">
             <arg value="exec" />
-            <arg value="vagrant" />
-            <arg value="basebox" />
+            <arg value="veewee" />
+            <arg value="vbox" />
             <arg value="build" />
             <arg value="${box.definition}" />
             <arg value="--force" />
@@ -44,8 +49,8 @@
     <target name="validate-vbox" description="Validate the veewee box">
         <exec executable="bundle" failonerror="false">
             <arg value="exec" />
-            <arg value="vagrant" />
-            <arg value="basebox" />
+            <arg value="veewee" />
+            <arg value="vbox" />
             <arg value="validate" />
             <arg value="${box.definition}" />
         </exec>
@@ -54,8 +59,8 @@
     <target name="export-vbox" description="Export the veewee box">
         <exec executable="bundle" failonerror="true">
             <arg value="exec" />
-            <arg value="vagrant" />
-            <arg value="basebox" />
+            <arg value="veewee" />
+            <arg value="vbox" />
             <arg value="export" />
             <arg value="${box.definition}" />
         </exec>
