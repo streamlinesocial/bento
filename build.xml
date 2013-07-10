@@ -2,33 +2,43 @@
 
 <project name="Vagrant CentOS 6.3 64bit Box" default="build">
 
+    <property file="${basedir}/build.properties"/>
+
+    <target name="test-props">
+        <echo message="${basedir}/build/${box.definition}" />
+        <echo message="${basedir}/build/${box.name}" />
+    </target>
+
     <target name="build"
         depends="prepare,create-vbox,validate-vbox,export-vbox,rename-vbox"/>
 
     <target name="clean" description="Cleanup build artifacts">
-        <delete dir="${basedir}/strsocial-centos-6.3-x86_64.box"/>
-        <exec executable="vagrant" failonerror="false" failifexecutionfails="false">
+        <delete dir="${basedir}/build" />
+        <exec executable="vagrant" failonerror="false">
             <arg value="box" />
             <arg value="remove" />
-            <arg value="'centos-6.3'" />
+            <arg value="${box.definition}" />
+            <arg value="virtualbox" />
         </exec>
     </target>
 
     <target name="prepare" depends="clean" description="Prepare for build">
-        <mkdir dir="${basedir}/build"/>
+        <mkdir dir="${basedir}/build" />
         <exec executable="bundle" failonerror="true">
             <arg value="install" />
             <arg value="--binstubs" />
+            <arg value="--path" />
+            <arg path="gems" />
         </exec>
     </target>
 
     <target name="create-vbox" description="Build the veewee box">
         <exec executable="bundle" failonerror="true">
             <arg value="exec" />
-            <arg value="vagrant" />
-            <arg value="basebox" />
+            <arg value="veewee" />
+            <arg value="vbox" />
             <arg value="build" />
-            <arg value="centos-6.3" />
+            <arg value="${box.definition}" />
             <arg value="--force" />
             <arg value="--auto" />
             <arg value="--nogui" />
@@ -39,25 +49,25 @@
     <target name="validate-vbox" description="Validate the veewee box">
         <exec executable="bundle" failonerror="false">
             <arg value="exec" />
-            <arg value="vagrant" />
-            <arg value="basebox" />
+            <arg value="veewee" />
+            <arg value="vbox" />
             <arg value="validate" />
-            <arg value="centos-6.3" />
+            <arg value="${box.definition}" />
         </exec>
     </target>
 
     <target name="export-vbox" description="Export the veewee box">
         <exec executable="bundle" failonerror="true">
             <arg value="exec" />
-            <arg value="vagrant" />
-            <arg value="basebox" />
+            <arg value="veewee" />
+            <arg value="vbox" />
             <arg value="export" />
-            <arg value="centos-6.3" />
+            <arg value="${box.definition}" />
         </exec>
     </target>
 
     <target name="rename-vbox" description="Rename the vbox file to the final name">
-        <move file="centos-6.3.box" tofile="strsocial-centos-6.3-x86_64.box"/>
+        <move file="${box.definition}.box" tofile="${box.name}.box"/>
     </target>
 
 </project>
