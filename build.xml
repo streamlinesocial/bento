@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+     Usage: create a build.properties (see example) and run the following to create a VM
+     $ ant build
+
+     Example properties file: build.properties
+     box.definition=centos-6.3-i386
+     box.name=strsocial-${box.definition}
+ -->
+
+<project name="Bento build for VirtualBox base boxs" default="build">
+
+    <property file="${basedir}/build.properties"/>
+
+    <target name="test-props">
+        <echo message="${basedir}/build/${box.definition}" />
+        <echo message="${basedir}/build/${box.name}" />
+    </target>
+
+    <target name="build"
+        depends="prepare,create-vbox,validate-vbox,export-vbox,rename-vbox"/>
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build" />
+        <exec executable="vagrant" failonerror="false">
+            <arg value="box" />
+            <arg value="remove" />
+            <arg value="${box.definition}" />
+            <arg value="virtualbox" />
+        </exec>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build" />
+        <exec executable="bundle" failonerror="true">
+            <arg value="install" />
+            <arg value="--binstubs" />
+            <arg value="--path" />
+            <arg path="gems" />
+        </exec>
+    </target>
+
+    <target name="create-vbox" description="Build the veewee box">
+        <exec executable="bundle" failonerror="true">
+            <arg value="exec" />
+            <arg value="veewee" />
+            <arg value="vbox" />
+            <arg value="build" />
+            <arg value="${box.definition}" />
+            <arg value="--force" />
+            <arg value="--auto" />
+            <arg value="--nogui" />
+        </exec>
+    </target>
+
+    <!-- it's ok to fail, it will always fail ruby / puppet veewee checks. @see README.md -->
+    <target name="validate-vbox" description="Validate the veewee box">
+        <exec executable="bundle" failonerror="false">
+            <arg value="exec" />
+            <arg value="veewee" />
+            <arg value="vbox" />
+            <arg value="validate" />
+            <arg value="${box.definition}" />
+        </exec>
+    </target>
+
+    <target name="export-vbox" description="Export the veewee box">
+        <exec executable="bundle" failonerror="true">
+            <arg value="exec" />
+            <arg value="veewee" />
+            <arg value="vbox" />
+            <arg value="export" />
+            <arg value="${box.definition}" />
+        </exec>
+    </target>
+
+    <target name="rename-vbox" description="Rename the vbox file to the final name in the build dir">
+        <move file="${box.definition}.box" tofile="${basedir}/build/${box.name}.box"/>
+    </target>
+
+</project>
