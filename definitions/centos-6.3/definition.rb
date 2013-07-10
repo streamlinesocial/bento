@@ -8,6 +8,6 @@ session =
                         :memory_size=> '480',
                         :iso_file => iso,
                         :iso_md5 => "a991defc0a602d04f064c43290df0131",
-                        :iso_src => "http://mirrors.kernel.org/centos/6.3/isos/x86_64/#{iso}" )
+                        :iso_src => "http://archive.kernel.org/centos/6.3/isos/x86_64/#{iso}" )
 
 Veewee::Session.declare session
